@@ -1,4 +1,4 @@
-package com.adibsurani.twitsplit.view.contract
+package com.adibsurani.twitsplit.contract
 
 class BaseContract {
 

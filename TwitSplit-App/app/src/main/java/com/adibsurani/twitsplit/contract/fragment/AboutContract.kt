@@ -1,4 +1,6 @@
-package com.adibsurani.twitsplit.view.contract
+package com.adibsurani.twitsplit.contract.fragment
+
+import com.adibsurani.twitsplit.contract.BaseContract
 
 class AboutContract {
 
@@ -8,7 +10,8 @@ class AboutContract {
 
     }
 
-    interface Presenter: BaseContract.Presenter<View> {
+    interface Presenter:
+        BaseContract.Presenter<View> {
         fun loadMessage()
     }
 

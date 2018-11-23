@@ -1,10 +1,10 @@
 package com.adibsurani.twitsplit.di.module
 
 import com.adibsurani.twitsplit.data.api.ApiServiceInterface
-import com.adibsurani.twitsplit.view.contract.AboutContract
-import com.adibsurani.twitsplit.view.contract.TweetContract
-import com.adibsurani.twitsplit.view.presenter.AboutPresenter
-import com.adibsurani.twitsplit.view.presenter.TweetPresenter
+import com.adibsurani.twitsplit.contract.fragment.AboutContract
+import com.adibsurani.twitsplit.contract.fragment.TweetContract
+import com.adibsurani.twitsplit.presenter.fragment.AboutPresenter
+import com.adibsurani.twitsplit.presenter.fragment.TweetPresenter
 import dagger.Module
 import dagger.Provides
 

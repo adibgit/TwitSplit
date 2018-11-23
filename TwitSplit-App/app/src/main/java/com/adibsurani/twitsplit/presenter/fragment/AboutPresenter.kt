@@ -1,6 +1,6 @@
-package com.adibsurani.twitsplit.view.presenter
+package com.adibsurani.twitsplit.presenter.fragment
 
-import com.adibsurani.twitsplit.view.contract.AboutContract
+import com.adibsurani.twitsplit.contract.fragment.AboutContract
 
 class AboutPresenter: AboutContract.Presenter {
 

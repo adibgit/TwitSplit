@@ -1,4 +1,4 @@
-package com.adibsurani.twitsplit.view.fragment
+package com.adibsurani.twitsplit.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,20 +8,19 @@ import androidx.fragment.app.Fragment
 import com.adibsurani.twitsplit.R
 import com.adibsurani.twitsplit.di.component.DaggerFragmentComponent
 import com.adibsurani.twitsplit.di.module.FragmentModule
-import com.adibsurani.twitsplit.view.contract.TweetContract
-import com.afollestad.materialdialogs.MaterialDialog
+import com.adibsurani.twitsplit.contract.fragment.AboutContract
 import javax.inject.Inject
 
-class TweetFragment:
+class AboutFragment:
     Fragment(),
-    TweetContract.View {
+    AboutContract.View {
 
     @Inject
-    lateinit var tweetPresenter: TweetContract.Presenter
+    lateinit var aboutPresenter: AboutContract.Presenter
     private lateinit var rootView: View
 
-    fun newInstance(): TweetFragment {
-        return TweetFragment()
+    fun newInstance(): AboutFragment {
+        return AboutFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,50 +29,43 @@ class TweetFragment:
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater!!.inflate(R.layout.fragment_tweet, container, false)
+        rootView = inflater!!.inflate(R.layout.fragment_about, container, false)
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tweetPresenter.attach(this)
-        tweetPresenter.subscribe()
+        aboutPresenter.attach(this)
+        aboutPresenter.subscribe()
         initView()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        tweetPresenter.unsubscribe()
+        aboutPresenter.unsubscribe()
     }
 
-    override fun showTweetLoad(show: Boolean) {
-        if (show) {
+    override fun showProgress(show: Boolean) {
 
-        } else {
-
-        }
     }
 
-    override fun showErrorMessage(error: String) {
-        MaterialDialog(context!!)
-            .title(text = "Tweet Post Failed")
-            .message(text = "Please Try Again")
-            .show()
-    }
-
-    override fun postTweetSuccess(tweets: List<String>) {
+    override fun loadMessageSuccess(message: String) {
 
     }
 
     private fun injectDependency() {
-        val tweetComponent = DaggerFragmentComponent
-            .builder()
+        val aboutComponent = DaggerFragmentComponent.builder()
             .fragmentModule(FragmentModule())
             .build()
-        tweetComponent.inject(this)
+
+        aboutComponent.inject(this)
     }
 
     private fun initView() {
 
+    }
+
+    companion object {
+        val TAG: String = "AboutFragment"
     }
 }

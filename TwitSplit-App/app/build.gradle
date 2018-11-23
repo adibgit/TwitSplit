@@ -52,6 +52,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.1.0-alpha01'
     implementation 'com.afollestad.material-dialogs:core:2.0.0-rc1'
+    implementation 'com.nshmura:snappysmoothscroller:1.0.0'
+    implementation 'com.intuit.sdp:sdp-android:1.0.5'
 }
 
 kapt {

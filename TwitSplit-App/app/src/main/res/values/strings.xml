@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TwitSplit</string>
+
+    <string name="write_tweet">No Tweet so far. Why dont we tweet some!</string>
+    <string name="post_tweet">What is happening?</string>
+    <string name="label_tweet">POST TWEET</string>
 </resources>

@@ -1,6 +1,6 @@
-package com.adibsurani.twitsplit.view.presenter
+package com.adibsurani.twitsplit.presenter.activity
 
-import com.adibsurani.twitsplit.view.contract.HomeContract
+import com.adibsurani.twitsplit.contract.activity.HomeContract
 import io.reactivex.disposables.CompositeDisposable
 
 
