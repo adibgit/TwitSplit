@@ -3,8 +3,6 @@ package com.adibsurani.twitsplit.presenter.fragment
 import android.util.Log
 import com.adibsurani.twitsplit.contract.fragment.TweetContract
 import io.reactivex.disposables.CompositeDisposable
-import java.util.*
-import kotlin.collections.ArrayList
 
 class TweetPresenter : TweetContract.Presenter {
 
@@ -12,7 +10,6 @@ class TweetPresenter : TweetContract.Presenter {
     private lateinit var view: TweetContract.View
 
     override fun subscribe() {
-
     }
 
     override fun unsubscribe() {
@@ -24,30 +21,28 @@ class TweetPresenter : TweetContract.Presenter {
     }
 
     override fun postTweet(tweet: String) {
+        val tweetSize = 50
         val originalTweetSize = tweet.count()
-        val tweetChars : CharArray = tweet.toCharArray()
-        val tweetList = ArrayList<String>()
         val finalTweetList = ArrayList<String>()
 
-        Log.e("tweet size ", "$originalTweetSize")
-        Log.e("tweet char ", "${tweetChars.size}")
+        if (originalTweetSize > tweetSize) {
+            val chunkTweets = tweet.chunked(tweetSize)
+            val chunkTweetsSize = chunkTweets.size
 
-        if (originalTweetSize > 20) {
-            for (tweets in tweet.split("(?<=\\G.{20})")) {
-                Log.e("TWEET", tweets)
-                tweetList.add(tweets)
-            }
+            Log.e("Chunk Tweets", "$chunkTweets")
+            Log.e("Chunk Tweets Size", "$chunkTweetsSize")
+            Log.e("Tweet Size", "$originalTweetSize")
 
-            val tweetListSize = tweetList.size
-            for(tweets in tweetList) {
-                val pagedTweet = "${tweetList.indexOf(tweets) + 1}" + "/" + "$tweetListSize" + " " + tweets
+            for(tweets in chunkTweets) {
+                val pagedTweet = "${chunkTweets.indexOf(tweets) + 1}" + "/" + "$chunkTweetsSize" + " " + tweets
                 finalTweetList.add(pagedTweet)
             }
 
-            if (finalTweetList.size == tweetListSize) {
+            Log.e("Final Tweet Size", "${finalTweetList[0].length}")
+
+            if (finalTweetList.size == chunkTweetsSize) {
                 view.postTweetSuccess(finalTweetList)
             }
-
         } else {
             finalTweetList.add(tweet)
             view.postTweetSuccess(finalTweetList)

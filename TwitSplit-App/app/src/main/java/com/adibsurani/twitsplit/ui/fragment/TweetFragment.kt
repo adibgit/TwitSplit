@@ -6,7 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.view.animation.AnimationUtils
+import androidx.annotation.RestrictTo
 import androidx.fragment.app.Fragment
 import com.adibsurani.twitsplit.R
 import com.adibsurani.twitsplit.contract.fragment.TweetContract
@@ -16,10 +17,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.fragment_tweet.*
 import kotlinx.android.synthetic.main.layout_tweet_dialog.*
 import javax.inject.Inject
-import android.view.animation.AnimationUtils.loadAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import androidx.annotation.RestrictTo
 
 
 class TweetFragment:
@@ -108,8 +105,10 @@ class TweetFragment:
         }
 
         layout_post_tweet.setOnClickListener {
-//            tweetPresenter.postTweet(edit_text_tweet.text.toString())
-            tweetPresenter.postTweet("What if someday we live away from each other? Where all the vibes and views doesnt feel the same way as before.")
+            tweetPresenter.postTweet(edit_text_tweet.text.toString())
+//            tweetPresenter.postTweet("What if someday we live away from each other? " +
+//                    "Where all the vibes and views doesnt feel the same way as before. I am afraid to leave this pieces of places where we used to hangout" +
+//                    "And where can i see you again in this part of life timeline.")
         }
 
         image_dismiss.setOnClickListener {
@@ -120,9 +119,7 @@ class TweetFragment:
     }
 
     private fun showTweetDialog() {
-
         val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
-
         if (layout_dialog.visibility == View.GONE) {
             @RestrictTo
             fab_tweet.visibility = View.GONE
