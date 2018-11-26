@@ -32,8 +32,8 @@
         android:textColorHint="@color/colorWhite"
         android:gravity="top"
         android:textSize="@dimen/_10sdp"
-        android:inputType="textImeMultiLine"
-        android:imeOptions="actionNext"
+        android:inputType="textMultiLine"
+        android:lines="10"
         />
 
     <LinearLayout

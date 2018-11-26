@@ -2,10 +2,12 @@ package com.adibsurani.twitsplit.ui.fragment
 
 import android.os.Bundle
 import android.os.Handler
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import androidx.annotation.RestrictTo
 import androidx.fragment.app.Fragment
 import com.adibsurani.twitsplit.R
@@ -77,7 +79,7 @@ class TweetFragment:
     override fun postTweetSuccess(tweets: List<String>) {
         for (tweet in tweets) {
             tweetList.add(tweet)
-            tweetList.reverse()
+            //tweetList.reverse()
             tweetAdapter.notifyDataSetChanged()
         }
         tweetPresenter.showTweet()
@@ -115,6 +117,8 @@ class TweetFragment:
         handler.postDelayed({
             tweetPresenter.showNoTweet()
         }, 1000)
+        edit_text_tweet.imeOptions =  EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE
+        edit_text_tweet.setRawInputType(InputType.TYPE_CLASS_TEXT)
     }
 
     private fun setupClick() {
@@ -135,17 +139,23 @@ class TweetFragment:
                         positiveButton(text = "Sure") {
                             dismissDialog()
                             tweetPresenter.postTweet(tweetContent)
+                            clearEditText()
                         }
                     }
             } else {
                 dismissDialog()
                 tweetPresenter.postTweet(edit_text_tweet.text.toString())
+                clearEditText()
             }
         }
 
         image_dismiss.setOnClickListener {
             dismissDialog()
         }
+    }
+
+    private fun clearEditText() {
+        edit_text_tweet.setText("")
     }
 
     private fun setupAdapter() {
