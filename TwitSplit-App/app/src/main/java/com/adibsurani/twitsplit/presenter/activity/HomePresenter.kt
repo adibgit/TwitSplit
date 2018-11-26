@@ -10,7 +10,6 @@ class HomePresenter: HomeContract.Presenter {
     private lateinit var view: HomeContract.View
 
     override fun subscribe() {
-
     }
 
     override fun unsubscribe() {

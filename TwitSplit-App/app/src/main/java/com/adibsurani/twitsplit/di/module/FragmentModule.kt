@@ -11,23 +11,14 @@ import dagger.Provides
 
 @Module
 class FragmentModule {
-
-    /*provide presenter here*/
     @Provides
     fun provideTweetPresenter(): TweetContract.Presenter {
         return TweetPresenter()
     }
-
     @Provides
     fun provideAboutPresenter(): AboutContract.Presenter {
         return AboutPresenter()
     }
-
-
-    /*---------------------*/
-
-
-    /*provide services here*/
     @Provides
     fun provideApiService(): ApiServiceInterface {
         return ApiServiceInterface.create()

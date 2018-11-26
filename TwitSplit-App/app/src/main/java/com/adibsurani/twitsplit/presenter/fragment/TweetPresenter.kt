@@ -54,5 +54,8 @@ class TweetPresenter : TweetContract.Presenter {
         view.showNoTweetView()
     }
 
-
+    override fun showTweet() {
+        view.showTweetLoad(false)
+        view.showTweetView()
+    }
 }

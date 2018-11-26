@@ -32,7 +32,9 @@
         android:textColorHint="@color/colorWhite"
         android:gravity="top"
         android:textSize="@dimen/_10sdp"
-        android:inputType="textImeMultiLine"/>
+        android:inputType="textImeMultiLine"
+        android:imeOptions="actionNext"
+        />
 
     <LinearLayout
         android:id="@+id/layout_post_tweet"
@@ -41,7 +43,7 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/_25sdp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorWhite">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,7 +51,7 @@
             android:textStyle="bold"
             android:textSize="@dimen/_12sdp"
             android:gravity="center"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorPrimaryDark"/>
     </LinearLayout>
 
 </RelativeLayout>

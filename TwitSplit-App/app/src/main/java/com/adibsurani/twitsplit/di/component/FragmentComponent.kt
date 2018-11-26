@@ -8,8 +8,6 @@ import dagger.Component
 
 @Component(modules = [FragmentModule::class])
 interface FragmentComponent {
-
     fun inject(tweetFragment: TweetFragment)
     fun inject(aboutFragment: AboutFragment)
-
 }

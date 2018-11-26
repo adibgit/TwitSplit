@@ -14,7 +14,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:background="@color/colorWhite">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -29,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:background="@color/colorPrimary"/>
         <!--Progress-->
         <ProgressBar
             android:id="@+id/progressBar"

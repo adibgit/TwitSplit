@@ -7,6 +7,7 @@ class TweetContract {
     interface View: BaseContract.View {
         fun showTweetLoad(show: Boolean)
         fun showNoTweetView()
+        fun showTweetView()
         fun showErrorMessage(error: String)
         fun postTweetSuccess(tweets: List<String>)
     }
@@ -15,5 +16,6 @@ class TweetContract {
         BaseContract.Presenter<View> {
         fun postTweet(tweet: String)
         fun showNoTweet()
+        fun showTweet()
     }
 }

@@ -4,4 +4,8 @@
     <string name="write_tweet">No Tweet so far. Why dont we tweet some!</string>
     <string name="post_tweet">What is happening?</string>
     <string name="label_tweet">POST TWEET</string>
+
+    <string name="tweet_user">ADIB SURANI</string>
+    <string name="tweet_handle">adibsur</string>
+    <string name="tweet_content">Today is a nice day</string>
 </resources>

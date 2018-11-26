@@ -24,7 +24,6 @@ class HomeActivity:
         setContentView(R.layout.activity_main)
         injectDependency()
         homePresenter.attach(this)
-
     }
 
     override fun showAboutFragment() {
@@ -49,7 +48,6 @@ class HomeActivity:
     override fun onBackPressed() {
         val fragmentManager = supportFragmentManager
         val fragment = fragmentManager.findFragmentByTag(AboutFragment.TAG)
-
         if (fragment == null) {
             super.onBackPressed()
         } else {

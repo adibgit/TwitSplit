@@ -8,7 +8,6 @@ import dagger.Component
 
 @Component(modules = [ActivityModule::class])
 interface ActivityComponent {
-
     fun inject(homeActivity: HomeActivity)
     fun inject(splashActivity: SplashActivity)
 }

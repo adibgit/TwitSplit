@@ -11,19 +11,14 @@ import dagger.Provides
 
 @Module
 class ActivityModule(private var activity: Activity) {
-
     @Provides
     fun provideActivity(): Activity {
         return activity
     }
-
-
-
     @Provides
     fun provideHomePresenter(): HomeContract.Presenter {
         return HomePresenter()
     }
-
     @Provides
     fun provideSplashPresenter(): SplashContract.Presenter {
         return SplashPresenter()

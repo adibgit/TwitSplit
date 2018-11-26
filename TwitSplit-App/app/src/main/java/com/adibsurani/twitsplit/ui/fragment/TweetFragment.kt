@@ -2,7 +2,6 @@ package com.adibsurani.twitsplit.ui.fragment
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,12 @@ import com.adibsurani.twitsplit.R
 import com.adibsurani.twitsplit.contract.fragment.TweetContract
 import com.adibsurani.twitsplit.di.component.DaggerFragmentComponent
 import com.adibsurani.twitsplit.di.module.FragmentModule
+import com.adibsurani.twitsplit.helper.RecyclerUtil
+import com.adibsurani.twitsplit.ui.adapter.TweetAdapter
 import com.afollestad.materialdialogs.MaterialDialog
 import kotlinx.android.synthetic.main.fragment_tweet.*
 import kotlinx.android.synthetic.main.layout_tweet_dialog.*
+import java.util.*
 import javax.inject.Inject
 
 
@@ -27,6 +29,8 @@ class TweetFragment:
     lateinit var tweetPresenter: TweetContract.Presenter
     private lateinit var rootView: View
     private val handler = Handler()
+    private lateinit var tweetAdapter: TweetAdapter
+    private val tweetList = ArrayList<String>()
 
     fun newInstance(): TweetFragment {
         return TweetFragment()
@@ -47,6 +51,7 @@ class TweetFragment:
         tweetPresenter.attach(this)
         tweetPresenter.subscribe()
         initView()
+        initData()
     }
 
     override fun onDestroyView() {
@@ -70,7 +75,17 @@ class TweetFragment:
     }
 
     override fun postTweetSuccess(tweets: List<String>) {
-        Log.e("TWEETS ::", "$tweets")
+        for (tweet in tweets) {
+            tweetList.add(tweet)
+            tweetList.reverse()
+            tweetAdapter.notifyDataSetChanged()
+        }
+        tweetPresenter.showTweet()
+    }
+
+    override fun showTweetView() {
+        layout_no_tweet.visibility = View.GONE
+        recycler_tweet.visibility = View.VISIBLE
     }
 
     override fun showNoTweetView() {
@@ -88,12 +103,15 @@ class TweetFragment:
     private fun initView() {
         setupView()
         setupClick()
+        setupAdapter()
+    }
 
+    private fun initData() {
+        tweetList.reverse()
     }
 
     private fun setupView() {
         fab_tweet.bringToFront()
-
         handler.postDelayed({
             tweetPresenter.showNoTweet()
         }, 1000)
@@ -105,17 +123,35 @@ class TweetFragment:
         }
 
         layout_post_tweet.setOnClickListener {
-            tweetPresenter.postTweet(edit_text_tweet.text.toString())
-//            tweetPresenter.postTweet("What if someday we live away from each other? " +
-//                    "Where all the vibes and views doesnt feel the same way as before. I am afraid to leave this pieces of places where we used to hangout" +
-//                    "And where can i see you again in this part of life timeline.")
+            val tweetContent = edit_text_tweet.text.toString()
+            val tweetContentSize = tweetContent.count()
+
+            if (tweetContentSize > 50) {
+                MaterialDialog(context!!)
+                    .title(text = "Post Tweet")
+                    .message(text = "Your tweet has more than 50 characters. \n Are you sure to split into multiple tweet posts?")
+                    .show {
+                        negativeButton(text = "Cancel")
+                        positiveButton(text = "Sure") {
+                            dismissDialog()
+                            tweetPresenter.postTweet(tweetContent)
+                        }
+                    }
+            } else {
+                dismissDialog()
+                tweetPresenter.postTweet(edit_text_tweet.text.toString())
+            }
         }
 
         image_dismiss.setOnClickListener {
-            layout_dialog.visibility = View.GONE
-            @RestrictTo
-            fab_tweet.visibility = View.VISIBLE
+            dismissDialog()
         }
+    }
+
+    private fun setupAdapter() {
+        RecyclerUtil.setupVertical(recycler_tweet,context!!)
+        tweetAdapter = TweetAdapter(activity!!,context!!,tweetList)
+        recycler_tweet.adapter = tweetAdapter
     }
 
     private fun showTweetDialog() {
@@ -127,6 +163,12 @@ class TweetFragment:
             layout_dialog.bringToFront()
             layout_dialog.startAnimation(slideUp)
         }
+    }
+
+    private fun dismissDialog() {
+        layout_dialog.visibility = View.GONE
+        @RestrictTo
+        fab_tweet.visibility = View.VISIBLE
     }
 
     companion object {
